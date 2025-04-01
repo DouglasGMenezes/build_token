@@ -17,9 +17,11 @@ import static org.springframework.util.ClassUtils.isPresent;
 public class ServiceUser {
 
     private UserRepository userRepository;
+    private JWTSevice jwtSevice;
 
-    public ServiceUser(UserRepository userRepository) {
+    public ServiceUser(UserRepository userRepository, JWTSevice jwtSevice) {
         this.userRepository = userRepository;
+        this.jwtSevice = jwtSevice;
     }
 
 
@@ -38,7 +40,7 @@ public class ServiceUser {
 
 
     private boolean userWithPermission(String header , String email){
-        String userToken = " ";
+        String userToken = jwtSevice.getUserByToken(header);
 
         Optional<User> returnedUser = userRepository.findByEmail(userToken);
 
@@ -57,6 +59,7 @@ public class ServiceUser {
         }
         return returnedUser.get();
     }
+
 
     public void deleteUser(String header, String email) {
         Optional<User> userRemoved = userRepository.findByEmail(email);
