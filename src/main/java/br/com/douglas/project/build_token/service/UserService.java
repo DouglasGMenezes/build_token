@@ -9,15 +9,14 @@ import br.com.douglas.project.build_token.service.exception.NonExistingUserExcep
 import br.com.douglas.project.build_token.service.exception.PermissionDeniedException;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
-import static org.springframework.util.ClassUtils.isPresent;
 
 @Service
-public class ServiceUser {
+public class UserService {
 
     private UserRepository userRepository;
     private JWTSevice jwtSevice;
 
-    public ServiceUser(UserRepository userRepository, JWTSevice jwtSevice) {
+    public UserService(UserRepository userRepository, JWTSevice jwtSevice) {
         this.userRepository = userRepository;
         this.jwtSevice = jwtSevice;
     }

@@ -25,14 +25,15 @@ public class JWTSevice {
         this.userRepository = userRepository;
     }
 
-    public TokenUser authenticateUser(LoginUser loginUser){
-        Optional<User> user = userRepository.findByEmailAndPassWord(loginUser.email(), loginUser.password());
 
+    public TokenUser authenticateUser(LoginUser loginUser){
+
+        Optional<User> user = userRepository.findByEmailAndPassWord(loginUser.email(), loginUser.password());
         if (user.isEmpty()) {
             throw new InvalidLoginException("Login inválido.");
         }
-        String token = generateToken(loginUser.email());
 
+        String token = generateToken(loginUser.email());
         TokenUser userWithToken = new TokenUser(token);
 
         return userWithToken;
@@ -66,7 +67,6 @@ public class JWTSevice {
             throw new SecurityException("Erro na validação do token.");
         }
         return user;
-
     }
 
 
