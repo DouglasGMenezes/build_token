@@ -8,9 +8,7 @@ import br.com.douglas.project.build_token.service.exception.ExistingUserExceptio
 import br.com.douglas.project.build_token.service.exception.NonExistingUserException;
 import br.com.douglas.project.build_token.service.exception.PermissionDeniedException;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
-
 import static org.springframework.util.ClassUtils.isPresent;
 
 @Service
