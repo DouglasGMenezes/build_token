@@ -1,56 +1,46 @@
 package br.com.douglas.project.build_token.controller.exception;
-
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-
+import org.springframework.http.HttpStatus;
 import java.time.Instant;
 
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class ErrorResponse {
     private Instant timestamp;
-    private Integer status;
     private String error;
-    private String message;
     private String path;
+    private Integer status;
+    private String message;
+
+    public ErrorResponse(Instant timestamp, String error, String message, Integer status, String path) {
+        this.timestamp = timestamp;
+        this.error = error;
+        this.message = message;
+        this.status = status;
+        this.path = path;
+    }
+
+    public ErrorResponse(Instant now, int value, String error, String message, String requestURI) {
+    }
+
 
     public Instant getTimestamp() {
         return timestamp;
-    }
-
-    public Integer getStatus() {
-        return status;
     }
 
     public String getError() {
         return error;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
     public String getPath() {
         return path;
     }
 
-    public void setTimestamp(Instant timestamp) {
-        this.timestamp = timestamp;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
+    public String getMessage() {
+        return message;
     }
 }

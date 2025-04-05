@@ -24,12 +24,10 @@ public class UserService {
 
     public User createUser(RecordUser recordUser) {
         Optional<User> returnedUser = userRepository.findByEmail(recordUser.email());
-
         if(returnedUser.isPresent()){
             throw new ExistingUserException("Usuario já existente no sistema.");
         }
         User SaveNewUser = new User(recordUser);
-
         userRepository.save(SaveNewUser);
 
         return SaveNewUser;
@@ -38,7 +36,6 @@ public class UserService {
 
     private boolean userWithPermission(String header , String email){
         String userToken = jwtSevice.getUserByToken(header);
-
         Optional<User> returnedUser = userRepository.findByEmail(userToken);
 
         return returnedUser.isPresent() && returnedUser.get().getEmail().equals(email);
@@ -47,7 +44,6 @@ public class UserService {
 
     public User getUser(String email, String header) {
         Optional<User> returnedUser = userRepository.findByEmail(email);
-
         if(returnedUser.isEmpty()) {
             throw new NonExistingUserException("Usuário não existente.");
         }
