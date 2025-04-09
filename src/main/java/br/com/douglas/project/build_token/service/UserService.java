@@ -16,6 +16,7 @@ public class UserService {
     private UserRepository userRepository;
     private JWTSevice jwtSevice;
 
+
     public UserService(UserRepository userRepository, JWTSevice jwtSevice) {
         this.userRepository = userRepository;
         this.jwtSevice = jwtSevice;

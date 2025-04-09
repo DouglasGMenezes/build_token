@@ -6,6 +6,8 @@ import br.com.douglas.project.build_token.dto.TokenUser;
 import br.com.douglas.project.build_token.entity.User;
 import br.com.douglas.project.build_token.service.JWTSevice;
 import br.com.douglas.project.build_token.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +15,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/v1/api")
 public class UserLoginController {
 
-    private UserService userService;
-    private JWTSevice jwtSevice;
+    private final UserService userService;
+    private final JWTSevice jwtSevice;
+
+
+    public UserLoginController(UserService userService, JWTSevice jwtSevice){
+        this.userService = userService;
+        this.jwtSevice = jwtSevice;
+    }
 
 
     @PostMapping(value = "/register")
