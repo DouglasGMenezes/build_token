@@ -45,7 +45,7 @@ public class JWTSevice {
         return Jwts.builder()
                 .setHeaderParam("typ","JWT")
                 .setSubject(email)
-                .signWith(TOKEN_KEY,SignatureAlgorithm.ES256)
+                .signWith(TOKEN_KEY,SignatureAlgorithm.HS512)
                 .setExpiration(timeToken())
                 .compact();
     }
@@ -57,14 +57,15 @@ public class JWTSevice {
 
 
     public String getUserByToken(String header) {
-        if ( header == null || header.startsWith("Bearer ")) {
+        header = header.trim();
+        if (!header.startsWith("Bearer ")) {
             throw new SecurityException("Token inválido.");
         }
         String token = header.substring(7);
         String user;
         try {
             JwtParser parser = Jwts.parserBuilder().setSigningKey(TOKEN_KEY).build();
-            user = parser.parseClaimsJwt(token).getBody().getSubject();
+            user = parser.parseClaimsJws(token).getBody().getSubject();
         }catch (SecurityException e) {
             throw new SecurityException("Erro na validação do token.");
         }

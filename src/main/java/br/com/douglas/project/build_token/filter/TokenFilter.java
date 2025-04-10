@@ -32,7 +32,7 @@ public class TokenFilter extends GenericFilterBean {
 
         try {
             JwtParser parser = Jwts.parserBuilder().setSigningKey(JWTSevice.TOKEN_KEY).build();
-            parser.parseClaimsJwt(token).getBody();
+            parser.parseClaimsJws(token).getBody();
 
         }catch ( SignatureException | MalformedJwtException | UnsupportedJwtException | PrematureJwtException | IllegalArgumentException | ExpiredJwtException e ) {
             httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
